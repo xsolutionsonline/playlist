@@ -44,7 +44,7 @@ public class PlaylistService {
     public boolean deletePlaylist(String listname) {
         if (playlistRepository.findByName(listname)!= null) {
             try {
-                playlistRepository.deleteByNombre(listname);
+                playlistRepository.deleteByName(listname);
                 return true;
             } catch (Exception e) {
                 return false;

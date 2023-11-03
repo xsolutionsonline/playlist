@@ -7,11 +7,9 @@ import lombok.Data;
 @Builder
 public class SongDTO {
     private Long id;
-    private String titulo;
-    private String artista;
+    private String title;
+    private String artist;
     private String album;
-    private String anno;
-    private String genero;
-
-    // Getters y Setters
+    private String year;
+    private String genre;
 }

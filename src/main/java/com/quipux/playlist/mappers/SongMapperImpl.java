@@ -11,11 +11,11 @@ public class SongMapperImpl implements SongMapper {
     public SongDTO songToSongDTO(Song song) {
         return SongDTO.builder()
                 .id(song.getId())
-                .titulo(song.getTitulo())
-                .artista(song.getArtista())
+                .title(song.getTitulo())
+                .artist(song.getArtista())
                 .album(song.getAlbum())
-                .anno(song.getAnno())
-                .genero(song.getGenero())
+                .year(song.getAnno())
+                .genre(song.getGenero())
                 .build();
     }
 
@@ -24,11 +24,11 @@ public class SongMapperImpl implements SongMapper {
 
         return Song.builder()
                 .id(songDTO.getId())
-                .titulo(songDTO.getTitulo())
-                .artista(songDTO.getArtista())
+                .titulo(songDTO.getTitle())
+                .artista(songDTO.getArtist())
                 .album(songDTO.getAlbum())
-                .anno(songDTO.getAnno())
-                .genero(songDTO.getGenero())
+                .anno(songDTO.getYear())
+                .genero(songDTO.getGenre())
                 .build();
     }
 }

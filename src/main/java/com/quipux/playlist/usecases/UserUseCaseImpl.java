@@ -1,0 +1,45 @@
+package com.quipux.playlist.usecases;
+
+import com.quipux.playlist.config.exception.UserException;
+import com.quipux.playlist.mappers.UserMapper;
+import com.quipux.playlist.models.dto.UserDTO;
+import com.quipux.playlist.models.entities.User;
+import com.quipux.playlist.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserUseCaseImpl  implements UserUseCase{
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserMapper userMapper;
+
+
+
+        @Override
+        public UserDTO registerUser(UserDTO userDTO) {
+            validateUserForRegistration(userDTO);
+            User user = userMapper.userDTOTouser(userDTO);
+            User createdUser = userService.registerUser(user);
+
+            return userMapper.userToUsertDTO(createdUser);
+        }
+
+    @Override
+    public  ResponseEntity<String>  login(UserDTO userDTO) {
+        validateUserForRegistration(userDTO);
+        User user = userMapper.userDTOTouser(userDTO);
+
+        return  userService.login(user);
+    }
+
+    private void validateUserForRegistration(UserDTO user) {
+            if (user.getName() == null || user.getName().isEmpty()) {
+                throw new UserException("El campo 'nombre' es obligatorio");
+            }
+        }
+}
