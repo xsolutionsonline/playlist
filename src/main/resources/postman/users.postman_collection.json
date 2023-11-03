@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "4247a62e-d441-4a41-a931-815ec50f12db",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17477932",
+		"_collection_link": "https://crimson-spaceship-60905.postman.co/workspace/PlayList~8947ac27-1b0e-4a82-b2e4-aab937beb03a/collection/17477932-4247a62e-d441-4a41-a931-815ec50f12db?action=share&creator=17477932&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"admin\",\r\n    \"contactNumber\": \"123456789\",\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"123456\",\r\n    \"status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ejemplo Usuario\",\r\n    \"contactNumber\": \"123456789\",\r\n    \"email\": \"admin@correo.com\",\r\n    \"password\": \"123456\",\r\n    \"status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

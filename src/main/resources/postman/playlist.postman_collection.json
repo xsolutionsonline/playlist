@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "5b2589ce-765a-4c1a-9a66-04484cba89ec",
+		"name": "playlist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17477932",
+		"_collection_link": "https://crimson-spaceship-60905.postman.co/workspace/PlayList~8947ac27-1b0e-4a82-b2e4-aab937beb03a/collection/17477932-5b2589ce-765a-4c1a-9a66-04484cba89ec?action=share&creator=17477932&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "lists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBjb3JyZW8uY29tIiwiaWF0IjoxNjk5MDEyODI4LCJleHAiOjE2OTkwMTY0Mjh9.wXQrJ-90A5ELBX0zsgd5Wtm4401MP01vJh2pq7bjnhhs1orW7UyohbKbunaJ67BA9TnRkaxvrM0HI7_AynjcpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"LISTA 1\",\r\n    \"description\": \"LISTA DE EJEMPLO NUMERO 1\",\r\n    \"songs\": [\r\n        {\r\n            \"title\": \"Cancion 1\",\r\n            \"artist\": \"Artista 1\",\r\n            \"album\": \"Album 1\",\r\n            \"year\": \"2023\",\r\n            \"genre\": \"Rock\"\r\n        },\r\n        {\r\n            \"title\": \"Cancion 2\",\r\n            \"artist\": \"Artista 2\",\r\n            \"album\": \"Album 2\",\r\n            \"year\": \"2022\",\r\n            \"genre\": \"Balada\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPlaylists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBjb3JyZW8uY29tIiwiaWF0IjoxNjk5MDEyODI4LCJleHAiOjE2OTkwMTY0Mjh9.wXQrJ-90A5ELBX0zsgd5Wtm4401MP01vJh2pq7bjnhhs1orW7UyohbKbunaJ67BA9TnRkaxvrM0HI7_AynjcpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lists"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "byName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBjb3JyZW8uY29tIiwiaWF0IjoxNjk5MDEyODI4LCJleHAiOjE2OTkwMTY0Mjh9.wXQrJ-90A5ELBX0zsgd5Wtm4401MP01vJh2pq7bjnhhs1orW7UyohbKbunaJ67BA9TnRkaxvrM0HI7_AynjcpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lists/LISTA 1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lists",
+						"LISTA 1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletebyName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBjb3JyZW8uY29tIiwiaWF0IjoxNjk5MDEyODI4LCJleHAiOjE2OTkwMTY0Mjh9.wXQrJ-90A5ELBX0zsgd5Wtm4401MP01vJh2pq7bjnhhs1orW7UyohbKbunaJ67BA9TnRkaxvrM0HI7_AynjcpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lists/LISTA 1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lists",
+						"LISTA 1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
