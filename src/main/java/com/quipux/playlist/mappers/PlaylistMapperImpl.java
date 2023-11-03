@@ -33,9 +33,10 @@ public class PlaylistMapperImpl implements PlaylistMapper {
 
     @Override
     public Playlist playlistDTOToPlaylist(PlaylistDTO playlistDTO) {
-        Playlist playlist = new Playlist();
-        playlist.setName(playlistDTO.getName());
-        playlist.setDescription(playlistDTO.getDescription());
+        Playlist playlist = Playlist.builder()
+                .name(playlistDTO.getName())
+                .description(playlistDTO.getDescription())
+                .build();
 
         List<Song> songs = playlistDTO.getSongs().stream()
                 .map(songMapper::songDTOToSong)
