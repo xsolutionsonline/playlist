@@ -20,30 +20,28 @@ public class PlaylistMapperImpl implements PlaylistMapper {
 
     @Override
     public PlaylistDTO playlistToPlaylistDTO(Playlist playlist) {
-        List<SongDTO> songDTOs = playlist.getCanciones().stream()
+        List<SongDTO> songDTOs = playlist.getSongs().stream()
                 .map(songMapper::songToSongDTO)
                 .collect(Collectors.toList());
 
         return PlaylistDTO.builder()
-                .id(playlist.getId())
-                .nombre(playlist.getNombre())
-                .descripcion(playlist.getDescripcion())
-                .canciones(songDTOs)
+                .name(playlist.getName())
+                .description(playlist.getDescription())
+                .songs(songDTOs)
                 .build();
     }
 
     @Override
     public Playlist playlistDTOToPlaylist(PlaylistDTO playlistDTO) {
         Playlist playlist = new Playlist();
-        playlist.setId(playlistDTO.getId());
-        playlist.setNombre(playlistDTO.getNombre());
-        playlist.setDescripcion(playlistDTO.getDescripcion());
+        playlist.setName(playlistDTO.getName());
+        playlist.setDescription(playlistDTO.getDescription());
 
-        List<Song> songs = playlistDTO.getCanciones().stream()
+        List<Song> songs = playlistDTO.getSongs().stream()
                 .map(songMapper::songDTOToSong)
                 .collect(Collectors.toList());
 
-        playlist.setCanciones(songs);
+        playlist.setSongs(songs);
         return playlist;
     }
 }

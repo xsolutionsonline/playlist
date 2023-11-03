@@ -1,5 +1,6 @@
 package com.quipux.playlist.controllers;
 
+import com.quipux.playlist.config.constants.PlaylistConstants;
 import com.quipux.playlist.models.dto.PlaylistDTO;
 import com.quipux.playlist.usecases.PlaylistUseCase;
 import org.springframework.http.HttpStatus;
@@ -20,16 +21,12 @@ public class PlaylistController {
 
     @PostMapping
     public ResponseEntity<?> addNewPlaylist(@RequestBody PlaylistDTO playlistDTO) {
-        if (playlistDTO.getNombre() == null || playlistDTO.getCanciones().stream().anyMatch(songDTO -> songDTO.getTitulo().isEmpty())) {
-            return ResponseEntity.badRequest().body("El nombre de la lista o el título de la canción no pueden ser nulos o vacíos");
-        }
-
-        PlaylistDTO createdPlaylistDTO = playlistUseCase.addPlaylist(playlistDTO);
-
-        if (createdPlaylistDTO != null) {
+        try {
+            validatePlaylistDTO(playlistDTO);
+            PlaylistDTO createdPlaylistDTO = playlistUseCase.addPlaylist(playlistDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPlaylistDTO);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo crear la lista de reproducción");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -42,22 +39,32 @@ public class PlaylistController {
     @GetMapping("/{listname}")
     public ResponseEntity<?> getPlaylistByName(@PathVariable String listname) {
         PlaylistDTO playlist = playlistUseCase.getPlaylistByName(listname);
-
-        if (playlist != null) {
-            return ResponseEntity.ok(playlist);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Playlist not found");
-        }
+        return playlist != null ? ResponseEntity.ok(playlist) :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(PlaylistConstants.PLAYLIST_NOT_FOUND);
     }
-
 
     @DeleteMapping("/{listname}")
     public ResponseEntity<?> deletePlaylist(@PathVariable String listname) {
         boolean deleted = playlistUseCase.deletePlaylist(listname);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Playlist not found");
+        return deleted ? ResponseEntity.noContent().build() :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(PlaylistConstants.PLAYLIST_NOT_FOUND);
+    }
+
+    private void validatePlaylistDTO(PlaylistDTO playlistDTO) {
+        if (playlistDTO.getName() == null || playlistDTO.getName().isEmpty() ||
+                playlistDTO.getDescription() == null || playlistDTO.getDescription().isEmpty()) {
+
+            throw new IllegalArgumentException(PlaylistConstants.INVALID_NAME_OR_DESCRITPION);
+        }
+
+        if(playlistDTO.getSongs().stream().anyMatch(songDTO ->
+                songDTO.getTitle() == null || songDTO.getTitle().isEmpty() ||
+                        songDTO.getArtist() == null || songDTO.getArtist().isEmpty() ||
+                        songDTO.getAlbum() == null || songDTO.getAlbum().isEmpty() ||
+                        songDTO.getYear() == null || songDTO.getYear().isEmpty() ||
+                        songDTO.getGenre() == null || songDTO.getGenre().isEmpty())) {
+
+            throw new IllegalArgumentException(PlaylistConstants.INVALID_FIELD_SONG);
         }
     }
 }

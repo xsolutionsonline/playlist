@@ -4,13 +4,13 @@ import com.quipux.playlist.mappers.PlaylistMapper;
 import com.quipux.playlist.models.dto.PlaylistDTO;
 import com.quipux.playlist.models.entities.Playlist;
 import com.quipux.playlist.services.PlaylistService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Component
 public class PlaylistUseCaseImpl implements PlaylistUseCase {
-
     private final PlaylistService playlistService;
     private final PlaylistMapper playlistMapper;
 

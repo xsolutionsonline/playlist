@@ -8,20 +8,29 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
-@Entity
+@Entity(name="users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Song {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private String titulo;
-    private String artista;
-    private String album;
-    private String anno;
-    private String genero;
+    private String name;
+
+    private String contactNumber;
+
+    private String email;
+
+    private String password;
+
+    private String status;
+
+    private String role;
+
+
 }
