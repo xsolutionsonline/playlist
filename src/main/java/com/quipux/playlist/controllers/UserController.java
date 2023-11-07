@@ -18,10 +18,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserDTO user) {
+    public ResponseEntity<?> registerUser(@RequestBody UserDTO user) {
         try {
             UserDTO registeredUser = userUseCase.registerUser(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado exitosamente");
+            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

@@ -38,10 +38,10 @@ public class UserControllerTest {
 
         when(userUseCase.registerUser(any(UserDTO.class))).thenReturn(user);
 
-        ResponseEntity<String> response = userController.registerUser(user);
+        ResponseEntity<?> response = userController.registerUser(user);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Usuario registrado exitosamente", response.getBody());
+        assertEquals(user, response.getBody());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class UserControllerTest {
 
         when(userUseCase.registerUser(any(UserDTO.class))).thenThrow(new UserException("Registration failed"));
 
-        ResponseEntity<String> response = userController.registerUser(user);
+        ResponseEntity<?> response = userController.registerUser(user);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Registration failed", response.getBody());

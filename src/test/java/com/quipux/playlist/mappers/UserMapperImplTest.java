@@ -25,7 +25,7 @@ public class UserMapperImplTest {
                 .contactNumber("123456789")
                 .email("john@example.com")
                 .password("password")
-                .status("active")
+                .status(true)
                 .build();
 
         UserDTO userDTO = userMapper.userToUsertDTO(user);
@@ -34,7 +34,7 @@ public class UserMapperImplTest {
         assertEquals(user.getContactNumber(), userDTO.getContactNumber());
         assertEquals(user.getEmail(), userDTO.getEmail());
         assertEquals(user.getPassword(), userDTO.getPassword());
-        assertEquals(user.getStatus(), userDTO.getStatus());
+        assertEquals(user.isStatus(), userDTO.isStatus());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class UserMapperImplTest {
                 .contactNumber("123456789")
                 .email("john@example.com")
                 .password("password")
-                .status("active")
+                .status(true)
                 .build();
 
 
@@ -54,7 +54,7 @@ public class UserMapperImplTest {
         assertEquals(userDTO.getContactNumber(), user.getContactNumber());
         assertEquals(userDTO.getEmail(), user.getEmail());
         assertEquals(userDTO.getPassword(), user.getPassword());
-        assertEquals(userDTO.getStatus(), user.getStatus());
+        assertEquals(userDTO.isStatus(), user.isStatus());
     }
 }
 

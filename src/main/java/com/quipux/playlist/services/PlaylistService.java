@@ -33,7 +33,7 @@ public class PlaylistService {
     }
 
     public PlaylistDTO getPlaylistByName(String listname) {
-        Playlist playlist = playlistRepository.findByName(listname);
+        Playlist playlist = playlistRepository.findByNameIgnoreCase(listname);
         if (playlist != null) {
             return playlistMapper.playlistToPlaylistDTO(playlist);
         }
@@ -42,9 +42,9 @@ public class PlaylistService {
 
     @Transactional
     public boolean deletePlaylist(String listname) {
-        if (playlistRepository.findByName(listname)!= null) {
+        if (playlistRepository.findByNameIgnoreCase(listname)!= null) {
             try {
-                playlistRepository.deleteByName(listname);
+                playlistRepository.deleteByNameIgnoreCase(listname);
                 return true;
             } catch (Exception e) {
                 return false;

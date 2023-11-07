@@ -62,13 +62,13 @@ public class PlaylistServiceTest {
         Playlist playlist = Playlist.builder().build();
         PlaylistDTO playlistDTO = PlaylistDTO.builder().build();
 
-        when(playlistRepository.findByName(playlistName)).thenReturn(playlist);
+        when(playlistRepository.findByNameIgnoreCase(playlistName)).thenReturn(playlist);
         when(playlistMapper.playlistToPlaylistDTO(playlist)).thenReturn(playlistDTO);
 
         PlaylistDTO result = playlistService.getPlaylistByName(playlistName);
 
         assertEquals(playlistDTO, result);
-        verify(playlistRepository, times(1)).findByName(playlistName);
+        verify(playlistRepository, times(1)).findByNameIgnoreCase(playlistName);
         verify(playlistMapper, times(1)).playlistToPlaylistDTO(playlist);
     }
 
@@ -77,12 +77,12 @@ public class PlaylistServiceTest {
         String playlistName = "TestPlaylist";
         Playlist playlist = Playlist.builder().build();
 
-        when(playlistRepository.findByName(playlistName)).thenReturn(playlist);
+        when(playlistRepository.findByNameIgnoreCase(playlistName)).thenReturn(playlist);
 
         boolean result = playlistService.deletePlaylist(playlistName);
 
         assertTrue(result);
-        verify(playlistRepository, times(1)).findByName(playlistName);
-        verify(playlistRepository, times(1)).deleteByName(playlistName);
+        verify(playlistRepository, times(1)).findByNameIgnoreCase(playlistName);
+        verify(playlistRepository, times(1)).deleteByNameIgnoreCase(playlistName);
     }
 }
