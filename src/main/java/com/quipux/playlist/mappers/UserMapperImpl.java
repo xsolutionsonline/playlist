@@ -11,7 +11,7 @@ public class UserMapperImpl  implements UserMapper{
                 .contactNumber(user.getContactNumber())
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .status(user.getStatus())
+                .status(user.isStatus())
                 .build();
     }
 
@@ -22,7 +22,7 @@ public class UserMapperImpl  implements UserMapper{
                 .contactNumber(userDTO.getContactNumber())
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
-                .status(userDTO.getStatus())
+                .status(userDTO.isStatus())
                 .build();
     }
 }

@@ -31,15 +31,26 @@ public class UserUseCaseImpl  implements UserUseCase{
 
     @Override
     public  ResponseEntity<String>  login(UserDTO userDTO) {
-        validateUserForRegistration(userDTO);
+        validateUserForEmailPassword(userDTO);
         User user = userMapper.userDTOTouser(userDTO);
 
         return  userService.login(user);
+    }
+
+    private void validateUserForEmailPassword(UserDTO userDTO) {
+        if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
+            throw new UserException("El campo 'email' es obligatorio");
+        }
+
+        if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new UserException("El campo 'password' es obligatorio");
+        }
     }
 
     private void validateUserForRegistration(UserDTO user) {
             if (user.getName() == null || user.getName().isEmpty()) {
                 throw new UserException("El campo 'nombre' es obligatorio");
             }
+             validateUserForEmailPassword(user);
         }
 }

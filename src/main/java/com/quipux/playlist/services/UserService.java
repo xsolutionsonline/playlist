@@ -19,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
 
 
 @Slf4j
@@ -46,6 +47,11 @@ UserService {
 
 
     public User registerUser(User user) {
+        User userExist = userRepository.findByEmail(user.getEmail());
+        if (!Objects.isNull(userExist)) {
+            throw new IllegalArgumentException("El usuario ya está registrado");
+        }
+
         return userRepository.save(user);
     }
 
@@ -59,7 +65,7 @@ UserService {
             );
 
             if(authentication.isAuthenticated()){
-                if(customerDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")){
+                if(customerDetailsService.getUserDetail().isStatus()){
                     return new ResponseEntity<String>("{\"token\":\""
                             +jwtUtil.
                                     generateToken(customerDetailsService.getUserDetail().getEmail(),
@@ -92,7 +98,7 @@ UserService {
                 .contactNumber(requestMap.get("numeroContacto"))
                 .email(requestMap.get("email"))
                 .password(requestMap.get("password"))
-                .status(requestMap.get("false"))
+                .status(Boolean.parseBoolean(requestMap.get("false")))
                 .role("user")
                 .build();
     }

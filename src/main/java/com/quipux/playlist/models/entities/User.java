@@ -28,7 +28,7 @@ public class User {
 
     private String password;
 
-    private String status;
+    private boolean status;
 
     private String role;
 

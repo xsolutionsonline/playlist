@@ -10,7 +10,7 @@ public class UserDTO {
     private String contactNumber;
     private String email;
     private String password;
-    private String status;
+    private boolean status;
 }
 
 
